@@ -6,46 +6,46 @@ import { mainCharacter } from './images';
 function App() {
 
 
-  const levelNames = [
-    "Bronze",    // From 0 to 4999 coins
-    "Silver",    // From 5000 coins to 24,999 coins
-    "Gold",      // From 25,000 coins to 99,999 coins
-    "Platinum",  // From 100,000 coins to 999,999 coins
-    "Diamond",   // From 1,000,000 coins to 2,000,000 coins
-    "Epic",      // From 2,000,000 coins to 10,000,000 coins
-    "Legendary", // From 10,000,000 coins to 50,000,000 coins
-    "Master",    // From 50,000,000 coins to 100,000,000 coins
-    "GrandMaster", // From 100,000,000 coins to 1,000,000,000 coins
-    "Lord"       // From 1,000,000,000 coins to ∞
-  ];
+  // const levelNames = [
+  //   "Bronze",    // From 0 to 4999 coins
+  //   "Silver",    // From 5000 coins to 24,999 coins
+  //   "Gold",      // From 25,000 coins to 99,999 coins
+  //   "Platinum",  // From 100,000 coins to 999,999 coins
+  //   "Diamond",   // From 1,000,000 coins to 2,000,000 coins
+  //   "Epic",      // From 2,000,000 coins to 10,000,000 coins
+  //   "Legendary", // From 10,000,000 coins to 50,000,000 coins
+  //   "Master",    // From 50,000,000 coins to 100,000,000 coins
+  //   "GrandMaster", // From 100,000,000 coins to 1,000,000,000 coins
+  //   "Lord"       // From 1,000,000,000 coins to ∞
+  // ];
 
-  const levelMinPoints = [
-    0,        // Bronze
-    5000,     // Silver
-    25000,    // Gold
-    100000,   // Platinum
-    1000000,  // Diamond
-    2000000,  // Epic
-    10000000, // Legendary
-    50000000, // Master
-    100000000,// GrandMaster
-    1000000000// Lord
-  ];
+  // const levelMinPoints = [
+  //   0,        // Bronze
+  //   5000,     // Silver
+  //   25000,    // Gold
+  //   100000,   // Platinum
+  //   1000000,  // Diamond
+  //   2000000,  // Epic
+  //   10000000, // Legendary
+  //   50000000, // Master
+  //   100000000,// GrandMaster
+  //   1000000000// Lord
+  // ];
 
-  const [levelIndex, setlevelIndex] = useState(6);
-  const [points, setPoints] = useState(22749365);
+  // const [levelIndex, setlevelIndex] = useState(6);
+  // const [points, setPoints] = useState(22749365);
 
   const [counter, setCounter] = useState(0);
 
-  const calculateProgress = () => {
-    if (levelIndex >= levelNames.length - 1) {
-      return 100;
-    }
-    const currentLevelMin = levelMinPoints[levelIndex];
-    const nextLevelMin = levelMinPoints[levelIndex + 1];
-    const progress = ((points - currentLevelMin) / (nextLevelMin - currentLevelMin)) * 100;
-    return Math.min(progress, 100);
-  };
+  // const calculateProgress = () => {
+  //   if (levelIndex >= levelNames.length - 1) {
+  //     return 100;
+  //   }
+  //   const currentLevelMin = levelMinPoints[levelIndex];
+  //   const nextLevelMin = levelMinPoints[levelIndex + 1];
+  //   const progress = ((points - currentLevelMin) / (nextLevelMin - currentLevelMin)) * 100;
+  //   return Math.min(progress, 100);
+  // };
 
 
   const handleCardClick = (e: { currentTarget: any; clientX: number; clientY: number; pageX: any; pageY: any; }) => {
@@ -85,8 +85,8 @@ function App() {
             <div className='flex items-center w-1/3'>
               <div className='w-full'>
                 <div className='flex justify-between'>
-                  <p className='text-sm'>{levelNames[levelIndex]}</p>
-                  <p className='text-sm'>{levelIndex + 1} <span className='text-[#95908a]'>/ {levelNames.length}</span></p>
+                  {/* <p className='text-sm'>{levelNames[levelIndex]}</p> */}
+                  <p className='text-sm'>7 <span className='text-[#95908a]'>/ 10</span></p>
                 </div>
               </div>
             </div>
