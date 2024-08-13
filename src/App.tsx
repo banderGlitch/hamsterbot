@@ -1,13 +1,23 @@
 import { useState } from 'react';
 import './App.css';
 import Hamster from './icons/Hamster';
-import { mainCharacter } from './images';
+import Mine from './icons/Mine';
+import Info from './icons/Info';
+import Friends from './icons/Friends';
+import Settings from './icons/Settings';
+import Coins from './icons/Coins';
+import { dailyReward, dollarCoin, mainCharacter, dailyCipher, dailyCombo, binanceLogo, hamsterCoin } from './images';
+
+interface PopUp {
+  id: number;
+  text: string;
+}
 
 function App() {
-  const [counter, setCounter] = useState(0);
-  const [popUps, setPopUps] = useState([]);
+  const [counter, setCounter] = useState<number>(0);
+  const [popUps, setPopUps] = useState<PopUp[]>([]);
 
-  const handleCardClick = (e) => {
+  const handleCardClick = (e: React.MouseEvent<HTMLDivElement>) => {
     const card = e.currentTarget;
     const rect = card.getBoundingClientRect();
     const x = e.clientX - rect.left - rect.width / 2;
@@ -20,7 +30,7 @@ function App() {
     setCounter((prev) => prev + 1);
 
     // Add the pop-up effect
-    const newPopUp = { id: Date.now(), text: '+1' };
+    const newPopUp: PopUp = { id: Date.now(), text: '+1' };
     setPopUps((prev) => [...prev, newPopUp]);
 
     // Remove the pop-up after animation ends
@@ -30,10 +40,10 @@ function App() {
   };
 
   return (
-    <div className='bg-black flex justify-center'>
+    <div className='bg-black flex justify-center items-center min-h-screen'>
       <div className='w-full bg-black text-white h-screen font-bold flex flex-col max-w-xl'>
         <div className='px-4 z-10'>
-          <div className="flex item-center space-x-2 pt-2">
+          <div className="flex items-center space-x-2 pt-2">
             <div className='p-1 rounded-lg bg-[#1d2825]'>
               <Hamster size={24} className='text-[#d4d4d4]' />
             </div>
@@ -48,9 +58,65 @@ function App() {
                   <p className='text-sm'>7 <span className='text-[#95908a]'>/ 10</span></p>
                 </div>
                 <div className='flex items-center mt-1 border-2 border-[#43433b] rounded-full'>
-                  <div className='w-full h-2 bg-[#43433b]/[0.6] rounded-full '>
-                    <div className='progress-gradient h-2 rounded-full'>
+                  <div className='w-full h-2 bg-[#43433b]/[0.6] rounded-full'>
+                    <div className='progress-gradient h-2 rounded-full w-[80px]'></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className='flex items-center w-2/3 border-2 border-[#43433b] rounded-full px-4 py-[2px] bg-[#43433b]/[0.6] max-w-64'>
+              {/* <img src={binanceLogo} alt='Exchange' className='w-8 h-8'/> */}
+              <div className='flex-1 text-center'>
+                <p className='text-xs text-[#85827d]'>Profit per hour</p>
+                <div className='flex items-center justify-center space-x-1'>
+                  <img src={dollarCoin} className='w-[30px]' alt="Dollar Coin" />
+                  <p className='text-sm'>+126.42KX</p>
+                  <Info size={20} className='text-[#43433b]' />
+                </div>
+              </div>
+              <Settings className='text-white' />
+            </div>
+          </div>
+        </div>
+
+        <div className='flex-grow mt-4 bg-[#f3ba2f] rounded-t-[48px] relative top-glow z-0'>
+          <div className='absolute top-[2px] left-0 right-0 bottom-0 bg-[#1d2025] rounded-t-[46px]'>
+            <div className='px-4 mt-6 flex justify-between gap-2'>
+              <div className='flex flex-col'>
+                <div className='flex flex-row'>
+                  <div className='bg-[#272a2f] rounded-lg px-4 py-2 w-full relative'>
+                    <div className='dot'></div>
+                    <img src={dailyReward} alt='Daily Reward' className='mx-auto w-12 h-12' />
+                    <p className='text-[10px] text-center text-white mt-1'>Daily reward</p>
+                    <p className='text-[10px] font-medium text-center'>10 22</p>
+                  </div>
+                  <div className='bg-[#272a2f] rounded-lg px-4 py-2 w-full relative'>
+                    <div className='dot'></div>
+                    <img src={dailyCipher} alt='Daily Cipher' className='mx-auto w-12 h-12' />
+                    <p className='text-[10px] text-center text-white mt-1'>Daily cipher</p>
+                    <p className='text-[10px] font-medium text-center'>10 22</p>
+                  </div>
+                  <div className='bg-[#272a2f] rounded-lg px-4 py-2 w-full relative'>
+                    <div className='dot'></div>
+                    <img src={dailyCombo} alt='Daily Combo' className='mx-auto w-12 h-12' />
+                    <p className='text-[10px] text-center text-white mt-1'>Daily combo</p>
+                    <p className='text-[10px] font-medium text-center'>10 22</p>
+                  </div>
+                </div>
+                {/* Additional content can be added here */}
+                <div className='flex flex-col items-center justify-center px-4 mt-4'>
+                  <div className='w-80 h-80 p-4 rounded-full circle-outer' onClick={handleCardClick}>
+                    <div className='w-full h-full rounded-full circle-inner'>
+                      <img src={mainCharacter} className='w-full h-full' alt="Main Character" />
+                      {popUps.map((popUp) => (
+                        <div key={popUp.id} className='text-[#00ff00] text-lg pop-up'>
+                          {popUp.text}
+                        </div>
+                      ))}
                     </div>
+                  </div>
+                  <div className='relative mt-4 flex flex-col items-center'>
+                    <div className='flex text-white justify-center'>Count {counter}</div>
                   </div>
                 </div>
               </div>
@@ -58,19 +124,27 @@ function App() {
           </div>
         </div>
 
-        <div className='flex flex-col items-center justify-center px-4 mt-4'>
-          <div className='w-80 h-80 p-4 rounded-full circle-outer' onClick={handleCardClick}>
-            <div className='w-full h-full rounded-full circle-inner'>
-              <img src={mainCharacter} className='w-full h-full' />
-            </div>
+        {/* Bottom fixed div */}
+        <div className="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-[calc(100%-2rem)] max-w-xl bg-[#272a2f] flex justify-around items-center z-50 rounded-3xl text-xs">
+          <div className="text-center text-[#85827d] w-1/5 bg-[#1c1f24] m-1 p-2 rounded-2xl">
+            <img src={binanceLogo} alt="Exchange" className="w-8 h-8 mx-auto" />
+            <p className="mt-1">Exchange</p>
           </div>
-          <div className='relative mt-4 flex flex-col items-center'>
-            <div className='flex text-white justify-center'>Count {counter}</div>
-            {popUps.map((popUp) => (
-              <div key={popUp.id} className='text-[#00ff00] text-lg pop-up'>
-                {popUp.text}
-              </div>
-            ))}
+          <div className="text-center text-[#85827d] w-1/5">
+            <Mine className="w-8 h-8 mx-auto" />
+            <p className="mt-1">Mine</p>
+          </div>
+          <div className="text-center text-[#85827d] w-1/5">
+            <Friends className="w-8 h-8 mx-auto" />
+            <p className="mt-1">Friends</p>
+          </div>
+          <div className="text-center text-[#85827d] w-1/5">
+            <Coins className="w-8 h-8 mx-auto" />
+            <p className="mt-1">Earn</p>
+          </div>
+          <div className="text-center text-[#85827d] w-1/5">
+            <img src={hamsterCoin} alt="Airdrop" className="w-8 h-8 mx-auto" />
+            <p className="mt-1">Airdrop</p>
           </div>
         </div>
       </div>
@@ -79,6 +153,247 @@ function App() {
 }
 
 export default App;
+// import { useState } from 'react';
+// import './App.css';
+// import Hamster from './icons/Hamster';
+// import { dailyReward, dollarCoin, mainCharacter, dailyCipher, dailyCombo , binanceLogo } from './images';
+// import Mine from './icons/Mine';
+// import Info from './icons/Info';
+// import Friends from './icons/Friends';
+// import Settings from './icons/Settings';
+// import Coins from './icons/Coins';
+// import { hamsterCoin } from './images';
+
+// function App() {
+//   const [counter, setCounter] = useState(0);
+//   const [popUps, setPopUps] = useState([]);
+//   const profitPerHour = 126780;
+
+//   const handleCardClick = (e: { currentTarget: any; clientX: number; clientY: number; }) => {
+//     const card = e.currentTarget;
+//     const rect = card.getBoundingClientRect();
+//     const x = e.clientX - rect.left - rect.width / 2;
+//     const y = e.clientY - rect.top - rect.height / 2;
+//     card.style.transform = `perspective(1000px) rotateX(${-y / 10}deg) rotateY(${x / 10}deg)`;
+//     setTimeout(() => {
+//       card.style.transform = '';
+//     }, 100);
+
+//     setCounter((prev) => prev + 1);
+
+//     // Add the pop-up effect
+//     const newPopUp = { id: Date.now(), text: '+1' };
+//     setPopUps((prev) => [...prev, newPopUp]);
+
+//     // Remove the pop-up after animation ends
+//     setTimeout(() => {
+//       setPopUps((prev) => prev.filter((pop) => pop.id !== newPopUp.id));
+//     }, 1000);
+//   };
+
+//   return (
+//     <div className='bg-black flex justify-center items-center min-h-screen'>
+//       <div className='w-full bg-black text-white h-screen font-bold flex flex-col max-w-xl'>
+//         <div className='px-4 z-10'>
+//           <div className="flex items-center space-x-2 pt-2">
+//             <div className='p-1 rounded-lg bg-[#1d2825]'>
+//               <Hamster size={24} className='text-[#d4d4d4]' />
+//             </div>
+//           </div>
+//           <div>
+//             <p className='text-sm'>Nernay (CEO)</p>
+//           </div>
+//           <div className='flex items-center justify-between space-x-4 mt-1'>
+//             <div className='flex items-center w-1/3'>
+//               <div className='w-full'>
+//                 <div className='flex justify-between'>
+//                   <p className='text-sm'>7 <span className='text-[#95908a]'>/ 10</span></p>
+//                 </div>
+//                 <div className='flex items-center mt-1 border-2 border-[#43433b] rounded-full'>
+//                   <div className='w-full h-2 bg-[#43433b]/[0.6] rounded-full'>
+//                     <div className='progress-gradient h-2 rounded-full w-[80px]'>
+//                     </div>
+//                   </div>
+//                 </div>
+//               </div>
+//             </div>
+//             <div className='flex items-center w-2/3 border-2 border-[#43433b] rounded-full px-4 py-[2px] bg-[#43433b]/[0.6] max-w-64'>
+//               {/* <img src={binanceLogo} alt='Exchange' className='w-8 h-8'/> */}
+//               <div className='flex-1 text-center'>
+//                 <p className='text-xs text-[#85827d]'>Profit per hour</p>
+//                 <div className='flex items-center justify-center space-x-1'>
+//                   <img src={dollarCoin} className='w-[30px]' />
+//                   <p className='text-sm'>+126.42KX</p>
+//                   <Info size={20} className='text-[#43433b]' />
+//                 </div>
+//               </div>
+//               <Settings className='text-white' />
+//             </div>
+//           </div>
+//         </div>
+
+//         <div className='flex-grow mt-4 bg-[#f3ba2f] rounded-t-[48px] relative top-glow z-0'>
+//           <div className='absolute top-[2px] left-0 right-0 bottom-0 bg-[#1d2025] rounded-t-[46px]'>
+//             <div className='px-4 mt-6 flex justify-between gap-2'>
+//               <div className='flex flex-col'>
+//                 <div className='flex flex-row '>
+//               <div className='bg-[#272a2f] rounded-lg px-4 py-2 w-full relative'>
+//                 <div className='dot'></div>
+//                 <img src={dailyReward} alt='Daily Reward' className='mx-auto w-12 h-12'/>
+//                 <p className='text-[10px] text-center text-white mt-1'>Daily reward</p>
+//                 <p className='text-[10px] font-medium text-center'>10 22</p>
+//               </div>
+//               <div className='bg-[#272a2f] rounded-lg px-4 py-2 w-full relative'>
+//                 <div className='dot'></div>
+//                 <img src={dailyCipher} alt='Daily Reward' className='mx-auto w-12 h-12'/>
+//                 <p className='text-[10px] text-center text-white mt-1'>Daily cipher</p>
+//                 <p className='text-[10px] font-medium text-center'>10 22</p>
+//               </div>
+//               <div className='bg-[#272a2f] rounded-lg px-4 py-2 w-full relative'>
+//                 <div className='dot'></div>
+//                 <img src={ dailyCombo} alt='Daily Reward' className='mx-auto w-12 h-12'/>
+//                 <p className='text-[10px] text-center text-white mt-1'>Daily combo</p>
+//                 <p className='text-[10px] font-medium text-center'>10 22</p>
+//               </div>
+//               </div>
+//               {/* Additional content can be added here */}
+//               <div className='flex flex-col  items-center justify-center px-4 mt-4'>
+//                 <div className='w-80 h-80 p-4 rounded-full circle-outer' onClick={handleCardClick}>
+//                   <div className='w-full h-full rounded-full circle-inner'>
+//                     <img src={mainCharacter} className='w-full h-full' />
+//                     {popUps.map((popUp) => (
+//                     <div key={popUp.id} className='text-[#00ff00] text-lg pop-up'>
+//                       {popUp.text}
+//                     </div>
+//                      ))}
+//                   </div>
+//                 </div>
+//                 <div className='relative mt-4 flex flex-col items-center'>
+//                   <div className='flex text-white justify-center'>Count {counter}</div>
+//                   {/* {popUps.map((popUp) => (
+//                     <div key={popUp.id} className='text-[#00ff00] text-lg pop-up'>
+//                       {popUp.text}
+//                     </div>
+//                   ))} */}
+//                 </div>
+//               </div>
+//               </div>
+//             </div>
+//           </div>
+//         </div>
+
+//         {/* <div className='flex flex-col items-center justify-center px-4 mt-4'>
+//       <div className='w-80 h-80 p-4 rounded-full circle-outer' onClick={handleCardClick}>
+//         <div className='w-full h-full rounded-full circle-inner'>
+//           <img src={mainCharacter} className='w-full h-full' />
+//         </div>
+//       </div>
+//       <div className='relative mt-4 flex flex-col items-center'>
+//         <div className='flex text-white justify-center'>Count {counter}</div>
+//         {popUps.map((popUp) => (
+//           <div key={popUp.id} className='text-[#00ff00] text-lg pop-up'>
+//             {popUp.text}
+//           </div>
+//         ))}
+//       </div>
+//     </div> */}
+//     {/* Bottom fixed div */}
+//     <div className="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-[calc(100%-2rem)] max-w-xl bg-[#272a2f] flex justify-around items-center z-50 rounded-3xl text-xs">
+//         <div className="text-center text-[#85827d] w-1/5 bg-[#1c1f24] m-1 p-2 rounded-2xl">
+//           <img src={binanceLogo} alt="Exchange" className="w-8 h-8 mx-auto" />
+//           <p className="mt-1">Exchange</p>
+//         </div>
+//         <div className="text-center text-[#85827d] w-1/5">
+//           <Mine className="w-8 h-8 mx-auto" />
+//           <p className="mt-1">Mine</p>
+//         </div>
+//         <div className="text-center text-[#85827d] w-1/5">
+//           <Friends className="w-8 h-8 mx-auto" />
+//           <p className="mt-1">Friends</p>
+//         </div>
+//         <div className="text-center text-[#85827d] w-1/5">
+//           <Coins className="w-8 h-8 mx-auto" />
+//           <p className="mt-1">Earn</p>
+//         </div>
+//         <div className="text-center text-[#85827d] w-1/5">
+//           <img src={hamsterCoin} alt="Airdrop" className="w-8 h-8 mx-auto" />
+//           <p className="mt-1">Airdrop</p>
+//         </div>
+//       </div>
+//       </div>
+//     </div>
+
+    // <div className='bg-black flex justify-center'>
+    //   <div className='w-full bg-black text-white h-screen font-bold flex flex-col max-w-xl'>
+    //     <div className='px-4 z-10'>
+    //       <div className="flex item-center space-x-2 pt-2">
+    //         <div className='p-1 rounded-lg bg-[#1d2825]'>
+    //           <Hamster size={24} className='text-[#d4d4d4]' />
+    //         </div>
+    //       </div>
+    //       <div>
+    //         <p className='text-sm'>Nernay (CEO)</p>
+    //       </div>
+    //       <div className='flex items-center justify-between space-x-4 mt-1'>
+    //         <div className='flex items-center w-1/3'>
+    //           <div className='w-full'>
+    //             <div className='flex justify-between'>
+    //               <p className='text-sm'>7 <span className='text-[#95908a]'>/ 10</span></p>
+    //             </div>
+    //             <div className='flex items-center mt-1 border-2 border-[#43433b] rounded-full'>
+    //               <div className='w-full h-2 bg-[#43433b]/[0.6] rounded-full '>
+    //                 <div className='progress-gradient h-2 rounded-full' style= {{width:"80px"}}>
+    //                 </div>
+    //               </div>
+    //             </div>
+    //           </div>
+    //         </div>
+    //         <div className='flex items-center w-2/3 border-2 border-[#43433b] rounded-full px-4 py-[2px] bg-[#43433b]/[0.6] max-w-64'>
+    //           {/* <img src={binanceLogo} alt='Exchange' className='w-8 h-8'/> */}
+    //           <div className='flex-1 text-center'>
+    //             <p className='text-xs text-[#85827d]'>Profit per hour</p>
+    //             <div className='flex items-center justify-center space-x-1'>
+    //               <img src={dollarCoin} style={{width:"30px"}}/>
+    //               <p className='text-sm'>+126.42KX</p>
+    //               <Info size={20} className='text-[#43433b]'/>
+    //             </div>
+    //           </div>
+    //           <Settings className='text-white'/>
+    //         </div>
+    //       </div>
+    //     </div>
+
+    //     <div className='flow-grow mt-4 bg-[#f3ba2f] rounded-t-[48px] relative top-glow z-0'>
+    //       <div className='absolute top-[2px] left-0 right-0 bottom-0 bg-[#1d2025] rounded-t-[46px]'>
+    //         <div className='px-4 mt-6 flex justify-between gap-2'>
+
+    //         </div>
+
+    //       </div>
+
+    //     </div>
+
+    //     <div className='flex flex-col items-center justify-center px-4 mt-4'>
+    //       <div className='w-80 h-80 p-4 rounded-full circle-outer' onClick={handleCardClick}>
+    //         <div className='w-full h-full rounded-full circle-inner'>
+    //           <img src={mainCharacter} className='w-full h-full' />
+    //         </div>
+    //       </div>
+    //       <div className='relative mt-4 flex flex-col items-center'>
+    //         <div className='flex text-white justify-center'>Count {counter}</div>
+    //         {popUps.map((popUp) => (
+    //           <div key={popUp.id} className='text-[#00ff00] text-lg pop-up'>
+    //             {popUp.text}
+    //           </div>
+    //         ))}
+    //       </div>
+    //     </div>
+    //   </div>
+    // </div>
+//   );
+// }
+
+// export default App;
 // import { useState } from 'react';
 // import './App.css'
 // import Hamster from './icons/Hamster'
