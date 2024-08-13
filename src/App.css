@@ -28,6 +28,26 @@
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
 }
 
+.pop-up {
+  position: absolute;
+  animation: pop-up-animation 1s ease-out forwards;
+}
+
+@keyframes pop-up-animation {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-20px);
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(-40px);
+    opacity: 0;
+  }
+}
+
 /* #root {
   max-width: 1280px;
   margin: 0 auto;
