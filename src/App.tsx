@@ -65,7 +65,8 @@ const App: React.FC = () => {
     1000000000// Lord
   ];
 
-  const [levelIndex, setLevelIndex] = useState(6);
+  // const [levelIndex, setLevelIndex] = useState(6);
+  const levelIndex = 6
   const [points, setPoints] = useState(22749365);
   const [clicks, setClicks] = useState<{ id: number, x: number, y: number }[]>([]);
   const pointsToAdd = 11;
