@@ -1,0 +1,6 @@
+.fixed-width-button {
+    width: 130px; /* Adjust as needed */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }

@@ -1,15 +1,18 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import Hamster from './icons/Hamster';
-import { binanceLogo, dailyCipher, dailyCombo, dailyReward, dollarCoin, hamsterCoin, mainCharacter } from './images';
-import Info from './icons/Info';
-import Settings from './icons/Settings';
-import Mine from './icons/Mine';
-import Friends from './icons/Friends';
-import Coins from './icons/Coins';
+import Hamster from './icons/Hamster.js';
+import { binanceLogo, dailyCipher, dailyCombo, dailyReward, dollarCoin, hamsterCoin, mainCharacter } from './images/index.js';
+import Info from './icons/Info.js';
+import Settings from './icons/Settings.js';
+import Mine from './icons/Mine.js';
+import Friends from './icons/Friends.js';
+import Coins from './icons/Coins.js';
 import '@rainbow-me/rainbowkit/styles.css';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
+import { DecimalAppButton } from './Rainbowkit/customButton.tsx';
+
+
+// import { ConnectButton } from '@rainbow-me/rainbowkit';
 
 
 const MainApp: React.FC = () => {
@@ -157,7 +160,8 @@ const MainApp: React.FC = () => {
                     </div>
                   </div>
                   <div className="ml-auto flex items-center ">
-                    <ConnectButton showBalance={true} />
+                    <DecimalAppButton/>
+                    {/* <ConnectButton showBalance={true} /> */}
                   </div>
                 </div>
                 <div className="flex items-center justify-between space-x-4 mt-1">
