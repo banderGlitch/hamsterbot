@@ -135,15 +135,15 @@ const App: React.FC = () => {
     return Math.min(progress, 100);
   };
 
-  useEffect(() => {
-    const currentLevelMin = levelMinPoints[levelIndex];
-    const nextLevelMin = levelMinPoints[levelIndex + 1];
-    if (points >= nextLevelMin && levelIndex < levelNames.length - 1) {
-      setLevelIndex(levelIndex + 1);
-    } else if (points < currentLevelMin && levelIndex > 0) {
-      setLevelIndex(levelIndex - 1);
-    }
-  }, [points, levelIndex, levelMinPoints, levelNames.length]);
+  // useEffect(() => {
+  //   const currentLevelMin = levelMinPoints[levelIndex];
+  //   const nextLevelMin = levelMinPoints[levelIndex + 1];
+  //   if (points >= nextLevelMin && levelIndex < levelNames.length - 1) {
+  //     setLevelIndex(levelIndex + 1);
+  //   } else if (points < currentLevelMin && levelIndex > 0) {
+  //     setLevelIndex(levelIndex - 1);
+  //   }
+  // }, [points, levelIndex, levelMinPoints, levelNames.length]);
 
   const formatProfitPerHour = (profit: number) => {
     if (profit >= 1000000000) return `+${(profit / 1000000000).toFixed(2)}B`;
@@ -152,13 +152,13 @@ const App: React.FC = () => {
     return `+${profit}`;
   };
 
-  useEffect(() => {
-    const pointsPerSecond = Math.floor(profitPerHour / 3600);
-    const interval = setInterval(() => {
-      setPoints(prevPoints => prevPoints + pointsPerSecond);
-    }, 1000);
-    return () => clearInterval(interval);
-  }, [profitPerHour]);
+  // useEffect(() => {
+  //   const pointsPerSecond = Math.floor(profitPerHour / 3600);
+  //   const interval = setInterval(() => {
+  //     setPoints(prevPoints => prevPoints + pointsPerSecond);
+  //   }, 1000);
+  //   return () => clearInterval(interval);
+  // }, [profitPerHour]);
 
   const queryClient = new QueryClient();
 
@@ -239,10 +239,10 @@ const App: React.FC = () => {
                   </div>
 
                   <div className="px-4 mt-4 flex justify-center">
-                    <div className="px-4 py-2 flex items-center space-x-2">
+                    {/* <div className="px-4 py-2 flex items-center space-x-2">
                       <img src={dollarCoin} alt="Dollar Coin" className="w-10 h-10" />
                       <p className="text-4xl text-white">{points.toLocaleString()}</p>
-                    </div>
+                    </div> */}
                   </div>
 
                   <div className="px-4 mt-4 flex justify-center">
