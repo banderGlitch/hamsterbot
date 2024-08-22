@@ -56,6 +56,28 @@
   }
 }
 
+.rotate-animation {
+  animation: rotate3d 0.1s ease-out;
+}
+
+@keyframes rotate3d {
+  0% {
+    transform: perspective(1000px) rotateX(0deg) rotateY(0deg);
+  }
+  50% {
+    transform: perspective(1000px) rotateX(-15deg) rotateY(15deg);
+  }
+  100% {
+    transform: perspective(1000px) rotateX(0deg) rotateY(0deg);
+  }
+}
+
+/* Ensuring performance optimization */
+.circle-outer {
+  will-change: transform;
+}
+
+
 /* #root {
   max-width: 1280px;
   margin: 0 auto;
